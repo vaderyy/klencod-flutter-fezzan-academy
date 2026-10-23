@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#F2F2F7">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+<title>البوابة الالكترونية لجامعة فزان</title>
+<style>
+:root{
+  --bg:#F2F2F7; --card:#FFFFFF; --text:#000000; --muted:#8E8E93; --sep:rgba(60,60,67,.18);
+  --blue:#007AFF; --green:#34C759; --orange:#FF9500; --red:#FF3B30; --field:#E9E9EF;
+  --grad:linear-gradient(135deg,#0A84FF 0%,#5AC8FA 100%);
+  --shadow:0 1px 2px rgba(0,0,0,.06),0 8px 24px rgba(0,0,0,.06);
+  color-scheme:light;
+}
+[data-theme="dark"]{
+  --bg:#000000; --card:#1C1C1E; --text:#FFFFFF; --muted:#8E8E93; --sep:rgba(84,84,88,.65);
+  --blue:#0A84FF; --green:#30D158; --orange:#FF9F0A; --red:#FF453A; --field:#2C2C2E;
+  --grad:linear-gradient(135deg,#0A84FF 0%,#64D2FF 100%);
+  --shadow:0 8px 28px rgba(0,0,0,.5);
+  color-scheme:dark;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{
+  margin:0;min-height:100vh;
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","SF Arabic","Inter","IBM Plex Sans Arabic","Geeza Pro",Tahoma,sans-serif;
+  font-variant-numeric:tabular-nums;background:var(--bg);color:var(--text);
+  transition:background .3s,color .3s;-webkit-font-smoothing:antialiased;
+  padding:env(safe-area-inset-top,0) 0 calc(88px + env(safe-area-inset-bottom,0));
+}
+.wrap{max-width:460px;margin:0 auto;padding:0 18px}
+.hide{display:none!important}
+button,input{font:inherit}
+
+/* ===== Login (mirrors the portal) ===== */
+#login{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px 22px}
+#login .brand{text-align:center;margin-bottom:22px}
+#login .brand img{width:96px;height:96px;object-fit:contain;background:#fff;border-radius:24px;padding:6px;box-shadow:var(--shadow)}
+#login h1{font-size:22px;font-weight:700;margin:16px 0 4px;letter-spacing:-.3px}
+#login .welcome{color:var(--muted);font-size:15px;margin:0}
+.loginCard{width:100%;background:var(--card);border-radius:20px;padding:8px;box-shadow:var(--shadow)}
+.field{display:flex;align-items:center;gap:10px;background:var(--field);border-radius:14px;padding:0 14px;margin:8px}
+.field span{font-size:18px}
+.field input{flex:1;border:none;background:transparent;color:var(--text);padding:15px 0;font-size:16px;outline:none;direction:ltr;text-align:right}
+.field input::placeholder{color:var(--muted)}
+.btnMain{
+  width:calc(100% - 16px);margin:10px 8px 8px;padding:15px;border:none;border-radius:14px;
+  background:var(--blue);color:#fff;font-size:17px;font-weight:600;cursor:pointer;transition:transform .15s,opacity .2s;
+}
+.btnMain:active{transform:scale(.98)}
+.err{color:var(--red);font-size:13.5px;text-align:center;min-height:20px;margin:12px 0 0}
+.links{display:flex;flex-direction:column;align-items:center;gap:10px;margin-top:18px}
+.links a{color:var(--blue);text-decoration:none;font-size:15px}
+.foot{margin-top:28px;text-align:center;color:var(--muted);font-size:13px;line-height:1.7}
+.foot b{display:block;color:var(--text);font-weight:600;font-size:14px}
+
+/* ===== App ===== */
+.nav{display:flex;align-items:center;gap:12px;padding:18px 0 10px}
+.nav img{width:50px;height:50px;object-fit:contain;background:#fff;border-radius:14px;padding:4px;box-shadow:var(--shadow)}
+.nav .t{flex:1;min-width:0}
+.nav h1{margin:0;font-size:20px;font-weight:700;letter-spacing:-.3px}
+.nav p{margin:2px 0 0;font-size:13px;color:var(--muted)}
+.iconBtn{width:40px;height:40px;border-radius:50%;border:none;background:var(--card);box-shadow:var(--shadow);font-size:18px;cursor:pointer;color:var(--text)}
+.card{background:var(--card);border-radius:18px;box-shadow:var(--shadow);overflow:hidden;margin-bottom:14px}
+.hero{background:var(--grad);color:#fff;padding:20px;border-radius:20px}
+.hero .s{opacity:.9;font-size:14px;margin:0}
+.hero h2{margin:6px 0 4px;font-size:24px;font-weight:700}
+.sec{font-size:13px;font-weight:600;color:var(--muted);margin:22px 16px 8px;text-transform:none}
+.row{display:flex;align-items:center;gap:12px;padding:14px 16px;border-top:.5px solid var(--sep)}
+.row:first-child{border-top:none}
+.row .ic{width:30px;height:30px;border-radius:8px;display:grid;place-items:center;font-size:16px;color:#fff;flex:0 0 auto}
+.row .n{flex:1;font-size:16px;direction:ltr;text-align:right;font-weight:500}
+.row .m{font-size:13px;color:var(--muted);white-space:nowrap}
+.empty{padding:20px;text-align:center;color:var(--muted);font-size:15px}
+.seg{display:flex;background:var(--field);border-radius:10px;padding:2px;margin-bottom:14px;overflow-x:auto;scrollbar-width:none}
+.seg button{flex:1 0 auto;border:none;background:none;padding:8px 12px;border-radius:8px;color:var(--text);font-size:14px;cursor:pointer;white-space:nowrap}
+.seg button.on{background:var(--card);font-weight:600;box-shadow:0 1px 3px rgba(0,0,0,.15)}
+.search{width:100%;padding:11px 14px;border:none;border-radius:12px;background:var(--field);color:var(--text);font-size:16px;outline:none;margin-bottom:14px;direction:ltr;text-align:right}
+.bar{height:6px;border-radius:9px;background:var(--field);overflow:hidden;margin:6px 0 10px}
+.bar i{display:block;height:100%;width:0;background:var(--green);transition:width .4s}
+.sw{width:51px;height:31px;border-radius:99px;background:var(--field);position:relative;flex:0 0 auto;transition:background .25s}
+.sw::after{content:"";position:absolute;top:2px;right:2px;width:27px;height:27px;border-radius:50%;background:#fff;box-shadow:0 2px 4px rgba(0,0,0,.25);transition:transform .25s}
+.row.done .sw{background:var(--green)}
+.row.done .sw::after{transform:translateX(-20px)}
+.row.done .n{text-decoration:line-through;color:var(--muted)}
+.gin{width:76px;text-align:center;border:none;border-radius:10px;background:var(--field);color:var(--text);padding:9px;font-size:16px;outline:none}
+.let{width:26px;text-align:center;font-weight:700;color:var(--blue)}
+.avg{text-align:center;padding:22px;background:var(--grad);color:#fff}
+.avg p{margin:0;opacity:.9;font-size:14px}
+.avg h2{margin:4px 0 0;font-size:42px;font-weight:700;letter-spacing:-1px}
+.period{padding:4px 0 6px}
+.period h4{margin:10px 16px 4px;font-size:13px;color:var(--blue);font-weight:600}
+.period div{padding:11px 16px;border-top:.5px solid var(--sep);font-size:16px;direction:ltr;text-align:right}
+.period div:first-of-type{border-top:none}
+.linkRow{display:block;padding:15px 16px;color:var(--blue);text-decoration:none;font-size:16px;border-top:.5px solid var(--sep)}
+.linkRow:first-child{border-top:none}
+
+/* Tab bar (iPhone style) */
+.tabs{
+  position:fixed;bottom:0;left:0;right:0;max-width:460px;margin:0 auto;z-index:10;
+  display:flex;justify-content:space-around;padding:8px 6px calc(8px + env(safe-area-inset-bottom,0));
+  background:color-mix(in srgb,var(--card) 85%,transparent);
+  backdrop-filter:saturate(180%) blur(22px);-webkit-backdrop-filter:saturate(180%) blur(22px);
+  border-top:.5px solid var(--sep);
+}
+.tabs button{flex:1;border:none;background:none;color:var(--muted);font-size:11px;display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer;padding:4px 0}
+.tabs button i{font-style:normal;font-size:23px;line-height:1}
+.tabs button.on{color:var(--blue);font-weight:600}
+.view{display:none}
+.view.on{display:block;animation:f .35s ease}
+@keyframes f{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<!-- ===== شاشة تسجيل الدخول ===== -->
+<section id="login">
+  <div class="brand">
+    <img src="assets/logo.png" alt="جامعة فزان">
+    <h1>تسجيل دخول</h1>
+    <p class="welcome">مرحبا بك</p>
+  </div>
+  <form class="loginCard" id="loginForm" autocomplete="on">
+    <div class="field"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg><input id="user" placeholder="اسم المستخدم" autocomplete="username"></div>
+    <div class="field"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><input id="pass" type="password" placeholder="كلمة المرور" autocomplete="current-password"></div>
+    <button class="btnMain" type="submit">دخول</button>
+    <p class="err" id="err"></p>
+  </form>
+  <div class="links">
+    <a href="https://eus.fezzanu.edu.ly/index.php/Reset_password/" target="_blank" rel="noopener">هل نسيت كلمة المرور؟</a>
+    <a href="https://eus.fezzanu.edu.ly/Acount_Name" target="_blank" rel="noopener">انشـاء حسـاب</a>
+  </div>
+  <div class="foot">
+    <b>Electronic portal of fezzan universities</b>
+    مرحبا بك فى بوابة جامعة فزان
+  </div>
+</section>
+
+<!-- ===== التطبيق ===== -->
+<div id="app" class="hide">
+  <div class="wrap">
+    <div class="nav">
+      <img src="assets/logo.png" alt="">
+      <div class="t">
+        <h1>البوابة الالكترونية</h1>
+        <p id="who">جامعة فزان</p>
+      </div>
+      <button class="iconBtn" id="themeBtn" aria-label="الوضع">🌙</button>
+      <button class="iconBtn" id="logout" aria-label="خروج"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg></button>
+    </div>
+
+    <!-- الرئيسية -->
+    <div class="view on" id="v-home">
+      <div class="hero">
+        <p class="s" id="dateTxt"></p>
+        <h2 id="greet">مرحبا بك</h2>
+        <p class="s" id="sum"></p>
+      </div>
+      <div class="sec">محاضرات اليوم</div>
+      <div class="card" id="todayList"></div>
+      <div class="sec">الجدول الأسبوعي</div>
+      <div class="seg" id="dayTabs"></div>
+      <div class="card" id="weekList"></div>
+    </div>
+
+    <!-- المواد -->
+    <div class="view" id="v-courses">
+      <div class="sec" style="margin-top:14px">المواد الدراسية</div>
+      <input class="search" id="q" placeholder="ابحث عن مادة">
+      <div class="bar"><i id="pf"></i></div>
+      <p class="sec" style="margin-top:0" id="pt"></p>
+      <div class="card" id="courseList"></div>
+    </div>
+
+    <!-- الدرجات -->
+    <div class="view" id="v-grades">
+      <div class="sec" style="margin-top:14px">المعدل</div>
+      <div class="card avg"><p>المعدل من 100</p><h2 id="avg">—</h2></div>
+      <div class="sec">أدخل درجاتك</div>
+      <div class="card" id="gradeList"></div>
+      <p class="sec">تُحفظ الدرجات على جهازك. الربط الحي مع موقع الكلية يحتاج خادماً وسيطاً.</p>
+    </div>
+
+    <!-- الموقع -->
+    <div class="view" id="v-link">
+      <div class="sec" style="margin-top:14px">بوابة الكلية</div>
+      <div class="card">
+        <a class="linkRow" href="https://eus.fezzanu.edu.ly/" target="_blank" rel="noopener">فتح البوابة الالكترونية</a>
+        <a class="linkRow" href="https://eus.fezzanu.edu.ly/index.php/Reset_password/" target="_blank" rel="noopener">استعادة كلمة المرور</a>
+        <a class="linkRow" href="https://eus.fezzanu.edu.ly/Acount_Name" target="_blank" rel="noopener">إنشاء حساب</a>
+      </div>
+    </div>
+  </div>
+
+  <nav class="tabs">
+    <button data-v="home" class="on"><i><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M3 11l9-8 9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg></i>الرئيسية</button>
+    <button data-v="courses"><i><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M4 4h6a3 3 0 0 1 3 3v13a2 2 0 0 0-2-2H4zM20 4h-6a3 3 0 0 0-3 3v13a2 2 0 0 1 2-2h7z"/></svg></i>المواد</button>
+    <button data-v="grades"><i><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></i>الدرجات</button>
+    <button data-v="link"><i><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg></i>البوابة</button>
+  </nav>
+</div>
+
+<script>
+const DAYS=["السبت","الأحد","الاثنين","الثلاثاء","الأربعاء","الخميس"];
+const JSDAY={6:"السبت",0:"الأحد",1:"الاثنين",2:"الثلاثاء",3:"الأربعاء",4:"الخميس"};
+const PER={1:"الفترة الأولى",2:"الفترة الثانية",3:"الفترة الثالثة"};
+const COL=["#007AFF","#34C759","#FF9500","#AF52DE","#FF2D55","#5AC8FA"];
+const SCH={
+ "السبت":{1:["Physics II","Properties of Materials + Strength of Materials"],2:["Dig. Sig. Processing I","Physics I A","Measurements"],3:["Electric circuits II","Physics I B","Microprocessors I"]},
+ "الأحد":{1:["Measurements","Mathematics II","English language I A"],2:["Digital Electronics","Control System I","Microprocessors I","English language I B"],3:["Data Structure","Control Systems II"]},
+ "الاثنين":{1:["Measurements Lab","Digital Systems I","Fund. of Elect. Eng.","Arabic language II"],2:["Parallel Processing","Electric Circuits I","Islamic culture I"],3:["Digital Systems II","Computer Aided Design"]},
+ "الثلاثاء":{1:["Commun Eng. II","English language III","Arabic Language I A"],2:["Image Processing","Statics A","Chemistry I","Arabic Language I B"],3:["Digital Communication","Mathematics I B","Principles of Computer A"]},
+ "الأربعاء":{1:["Comp. & Networks Sec","Principles of Computer B","Mathematics I A","Mathematics III"],2:["Computer Programming (Java)","Chemistry II","Statics B","Elect. Circuit lab. II"],3:["Digital Systems Lab","Workshop Engineering"]},
+ "الخميس":{1:["Modern History of Libya","English language II"],2:["Descriptive Geometry","Civic Culture","Drawing engineering A","Numerical Analysis"],3:["Electronics Lab","Drawing engineering B","Dynamics"]}
+};
+const ALL=[...new Set(DAYS.flatMap(d=>[1,2,3].flatMap(n=>SCH[d][n]||[])))].sort();
+const $=s=>document.querySelector(s);
+const $$=s=>document.querySelectorAll(s);
+const st={get(k,d){try{const v=localStorage.getItem(k);return v==null?d:JSON.parse(v)}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+
+/* الوضع */
+function theme(t){document.documentElement.dataset.theme=t;$("#themeBtn").innerHTML=t==="dark"?'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>':'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>';st.set("fz-theme",t)}
+$("#themeBtn").onclick=()=>theme(document.documentElement.dataset.theme==="dark"?"light":"dark");
+theme(st.get("fz-theme",matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"));
+
+/* الدخول */
+function showApp(on){
+  $("#login").classList.toggle("hide",on);
+  $("#app").classList.toggle("hide",!on);
+  if(on){$("#who").textContent=st.get("fz-user","")||"جامعة فزان";initHome();renderCourses();renderGrades();}
+}
+$("#loginForm").onsubmit=e=>{
+  e.preventDefault();
+  const u=$("#user").value.trim(), p=$("#pass").value;
+  if(!u||!p){$("#err").textContent="الرجاء إدخال اسم المستخدم وكلمة المرور";return}
+  // ملاحظة: التحقق الحقيقي يتم عبر خادم وسيط (انظر الرد)
+  st.set("fz-user",u);st.set("fz-session",true);
+  $("#err").textContent="";$("#pass").value="";
+  showApp(true);
+};
+$("#logout").onclick=()=>{st.set("fz-session",false);showApp(false)};
+showApp(st.get("fz-session",false));
+
+/* التنقل */
+$$(".tabs button").forEach(b=>b.onclick=()=>{
+  $$(".tabs button").forEach(x=>x.classList.toggle("on",x===b));
+  $$(".view").forEach(v=>v.classList.toggle("on",v.id==="v-"+b.dataset.v));
+  window.scrollTo({top:0,behavior:"smooth"});
+});
+
+/* الرئيسية */
+function initHome(){
+  const now=new Date(), today=JSDAY[now.getDay()];
+  $("#dateTxt").textContent=now.toLocaleDateString("ar-LY",{weekday:"long",day:"numeric",month:"long"});
+  const h=now.getHours();
+  $("#greet").textContent=(h<12?"صباح الخير":h<18?"مساء الخير":"مساء النور");
+  const cnt=today?Object.values(SCH[today]).flat().length:0;
+  $("#sum").textContent=today?`لديك ${cnt} مواد اليوم`:"اليوم عطلة";
+  $("#todayList").innerHTML=today?lectures(today):`<div class="empty">لا محاضرات اليوم</div>`;
+  $("#dayTabs").innerHTML=DAYS.map(d=>`<button data-d="${d}">${d}</button>`).join("");
+  $$("#dayTabs button").forEach(b=>b.onclick=()=>week(b.dataset.d));
+  week(DAYS.includes(today)?today:"السبت");
+}
+function lectures(d){
+  let h="";
+  [1,2,3].forEach(n=>(SCH[d][n]||[]).forEach((c,i)=>{
+    h+=`<div class="row"><span class="ic" style="background:${COL[(h.length)%COL.length]}"></span><span class="n">${c}</span><span class="m">${PER[n]}</span></div>`;
+  }));
+  return h;
+}
+function week(d){
+  $("#dayTabs").querySelectorAll("button").forEach(b=>b.classList.toggle("on",b.dataset.d===d));
+  $("#weekList").innerHTML=[1,2,3].map(n=>`
+    <div class="period"><h4>${PER[n]}</h4>${(SCH[d][n]||[]).map(c=>`<div>${c}</div>`).join("")||'<div style="color:var(--muted)">—</div>'}</div>`).join("");
+}
+
+/* المواد */
+function renderCourses(){
+  const done=st.get("fz-done",[]), q=$("#q").value.trim().toLowerCase();
+  $("#courseList").innerHTML=ALL.filter(c=>c.toLowerCase().includes(q)).map(c=>`
+    <div class="row ${done.includes(c)?"done":""}" data-c="${c}"><span class="n">${c}</span><span class="sw"></span></div>`).join("")||`<div class="empty">لا نتائج</div>`;
+  $("#pf").style.width=Math.round(done.length/ALL.length*100)+"%";
+  $("#pt").textContent=`قرأت ${done.length} من ${ALL.length} مادة`;
+  $$("#courseList .row").forEach(r=>r.onclick=()=>{
+    let a=st.get("fz-done",[]);const c=r.dataset.c;
+    a=a.includes(c)?a.filter(x=>x!==c):[...a,c];st.set("fz-done",a);renderCourses();
+  });
+}
+$("#q").oninput=renderCourses;
+
+/* الدرجات */
+const L=g=>g===""||g==null||isNaN(g)?"—":(g>=90?"A":g>=80?"B":g>=70?"C":g>=60?"D":"F");
+function renderGrades(){
+  const g=st.get("fz-grades",{});
+  $("#gradeList").innerHTML=ALL.map(c=>`
+    <div class="row"><span class="n">${c}</span><input class="gin" type="number" min="0" max="100" data-g="${c}" value="${g[c]??""}" placeholder="—"><span class="let">${L(g[c])}</span></div>`).join("");
+  $$("[data-g]").forEach(i=>i.oninput=()=>{
+    const a=st.get("fz-grades",{});const v=i.value===""?"":Math.min(100,Math.max(0,+i.value));
+    if(v==="")delete a[i.dataset.g];else a[i.dataset.g]=v;
+    st.set("fz-grades",a);i.nextElementSibling.textContent=L(v);avg();
+  });
+  avg();
+}
+function avg(){
+  const v=Object.values(st.get("fz-grades",{})).map(Number).filter(x=>!isNaN(x));
+  $("#avg").textContent=v.length?(v.reduce((a,b)=>a+b,0)/v.length).toFixed(1):"—";
+}
+</script>
+</body>
+</html>
